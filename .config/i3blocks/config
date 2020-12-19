@@ -1,0 +1,69 @@
+command=~/.config/i3blocks/scripts/$BLOCK_NAME
+markup=pango
+
+[who]
+command=echo "<span color='cyan' font='Font Awesome 5 Free'></span> <span color='lime'>$USER</span>@$(hostname)"
+markup=pango
+interval=once
+
+[temperature]
+label= 
+interval=10
+
+[cpu_usage]
+LABEL=<span font='Font Awesome 5 Free'> </span>
+interval=persist
+
+[memory]
+label=<span font='Font Awesome 5 Free'> </span>
+interval=10
+
+[iface]
+label=<span font='Font Awesome 5 Free'> </span>
+interval=10
+
+[rofi-calendar]
+label=<span font='Font Awesome 5 Free'> </span>
+interval=3600
+DATEFTM=+%a %b %d %Y
+SHORTFTM=+%Y-%m-%d
+
+[time]
+label=<span font='Font Awesome 5 Free'> </span>
+command=date +"%I:%M %p "
+interval=60
+
+[volume-pulseaudio]
+interval=once
+signal=1
+#USE_ALSA_NAME=1
+#MIXER=[determined automatically]
+#SCONTROL=[determined automatically]
+##exposed format variables: ${SYMB}, ${VOL}, ${INDEX}, ${NAME}
+LONG_FORMAT="${SYMB} ${VOL}% "
+SHORT_FORMAT="${SYMB} ${VOL}% "
+AUDIO_HIGH_SYMBOL=<span font='Font Awesome 5 Free'></span>
+#AUDIO_MED_THRESH=50
+AUDIO_MED_SYMBOL=<span font='Font Awesome 5 Free'></span>
+#AUDIO_LOW_THRESH=0
+AUDIO_LOW_SYMBOL=<span font='Font Awesome 5 Free'></span>
+AUDIO_DELTA=5
+#DEFAULT_COLOR="#ffffff"
+#MUTED_COLOR="#a0a0a0"
+#USE_ALSA_NAME=0
+#USE_DESCRIPTION=0
+## SUBSCRIBE=1 requires interval=persist and always uses LONG_FORMAT
+#SUBSCRIBE=0
+
+#[shutdown_menu]
+#full_text=<span font='Font Awesome 5 Free> </span>
+#FG_COLOR=#bbbbbb
+#BG_COLOR=#111111
+#HLFG_COLOR=#111111
+#HLBG_COLOR=#bbbbbb
+#BORDER_COLOR=#222222
+#ROFI_TEXT=Logout
+#ROFI_OPTIONS=-width 11 -location 3 -hide-scrollbar -bw 2
+#ENABLE_CONFIRMATIONS=true
+#LAUNCHER=rofi
+#LOCKSCRIPT=i3lock --color=${BG_COLOR#"#"}

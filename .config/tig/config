@@ -1,0 +1,2 @@
+set git-colors = no		# Do not read Git's color settings.
+color cursor black white
