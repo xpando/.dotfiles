@@ -32,6 +32,8 @@ export FZFZ_RECENT_DIRS_TOOL=fasd
 # Fuzzy search AWS EC2 infra
 if type aws-fuzzy &>/dev/null; then
   export AWS_FUZZ_PRIVATE_IP='true'
+  export AWS_FUZZ_USER='dfindley'
+  export AWS_FUZZ_KEY_PATH='~/.ssh/newengen_rsa'
   export AWS_FUZZ_USE_CACHE=yes
   export AWS_FUZZ_CACHE_EXPIRY=3600  # expiry time in seconds
 fi
