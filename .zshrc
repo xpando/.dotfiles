@@ -14,6 +14,7 @@ export SAM_CLI_TELEMETRY=0
 
 # Prompt https://starship.rs
 # config in: ~/.config/starship.toml
+# Install: curl -fsSL --proto-redir https https://starship.rs/install.sh | bash
 eval "$(starship init zsh)"
 
 # Fuzzy find
@@ -36,9 +37,11 @@ if type aws-fuzzy &>/dev/null; then
   export AWS_FUZZ_KEY_PATH='~/.ssh/newengen_rsa'
   export AWS_FUZZ_USE_CACHE=yes
   export AWS_FUZZ_CACHE_EXPIRY=3600  # expiry time in seconds
+  alias awssh='aws-fuzzy --private'
 fi
 
 # ZSH Plugins
+# Install with: curl -sfL --proto-redir https https://git.io/antibody | sh -s - -b /usr/local/bin
 source <(antibody init)
 export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh"
 antibody bundle < ~/.zsh_plugins
@@ -52,6 +55,7 @@ alias docker-up='sudo systemctl start docker'
 alias docker-down='sudo systemctl stop docker && sudo systemctl stop containerd'
 alias vm-up='sudo systemctl start libvirtd && virsh net-start default'
 alias vm-down='sudo systemctl stop libvirtd && virsh net-destroy default'
+alias clean-logs='sudo journalctl --vacuum-time=10d'
 
 # Tmux
 alias t='tmux'
@@ -68,10 +72,10 @@ alias l='ls -lh'
 alias ll='ls -lah'
 
 # prefer nvim
-if type nvim &>/dev/null; then
-  alias vim='nvim'
-fi
-alias v='vim'
+#if type nvim &>/dev/null; then
+#  alias vim='nvim'
+#fi
+#alias v='vim'
 
 # Colorized cat
 if type bat &>/dev/null; then
@@ -103,6 +107,8 @@ if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
   source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
+# gradle zsh plugin provides this function
+# if it is present, alias it to gw
 if type gradle-or-gradlew &>/dev/null; then
   alias gw='gradle-or-gradlew'
 fi
@@ -112,11 +118,16 @@ if type fnm &>/dev/null; then
   eval "$(fnm env)"
 fi
 
-alias mirrors='reflector --verbose -f 5 -c US -p https'
-alias umirrors='mirrors | sudo tee /etc/pacman.d/mirrorlist'
-alias up='yay -Syyu --noconfirm --nodiffmenu --noeditmenu && yay -Sc --noconfirm && yay -Ps'
-alias pkgs='yay -Qett'
-alias ipkg='yay -Slq | fzf -m --preview '\''cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")'\'' | xargs -ro yay -S'
-alias upkg='yay -Qett | fzf -m --preview '\''cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")'\'' | xargs -ro yay -Rc' 
-alias clean-pkgs='yay -Yc && yay -Sc --noconfirm'
-alias clean-logs='sudo journalctl --vacuum-time=10d'
+case $(lsb_release -a | egrep 'Distributor ID:' | cut -f2) in
+  Arch)
+    alias mirrors='reflector --verbose -f 5 -c US -p https'
+    alias umirrors='mirrors | sudo tee /etc/pacman.d/mirrorlist'
+    alias up='yay -Syyu --noconfirm --nodiffmenu --noeditmenu && yay -Sc --noconfirm && yay -Ps'
+    alias pkgs='yay -Qett'
+    alias ipkg='yay -Slq | fzf -m --preview '\''cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")'\'' | xargs -ro yay -S'
+    alias upkg='yay -Qett | fzf -m --preview '\''cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")'\'' | xargs -ro yay -Rc' 
+    alias clean-pkgs='yay -Yc && yay -Sc --noconfirm'
+    ;;
+
+# TODO: add aliases specific to other distributions I use such as Ubuntu
+esac
