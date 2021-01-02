@@ -72,10 +72,11 @@ alias l='ls -lh'
 alias ll='ls -lah'
 
 # prefer nvim
-#if type nvim &>/dev/null; then
-#  alias vim='nvim'
-#fi
-#alias v='vim'
+if type nvim &>/dev/null; then
+  alias vim='nvim'
+  export EDITOR=nvim
+fi
+alias e="$EDITOR"
 
 # Colorized cat
 if type bat &>/dev/null; then
