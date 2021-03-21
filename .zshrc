@@ -5,7 +5,7 @@ export PATH=~/go/bin:$PATH
 export PATH=~/.cargo/bin:$PATH
 export PATH=~/.local/bin:$PATH
 
-export EDITOR=nvim
+export EDITOR=vim
 export LESS=FRX
 
 # Privacy
@@ -74,9 +74,7 @@ alias ll='ls -lah'
 # prefer nvim
 if type nvim &>/dev/null; then
   alias vim='nvim'
-  export EDITOR=nvim
 fi
-alias e="$EDITOR"
 
 # Colorized cat
 if type bat &>/dev/null; then
@@ -123,11 +121,11 @@ case $(lsb_release -a | egrep 'Distributor ID:' | cut -f2) in
   Arch)
     alias mirrors='reflector --verbose -f 5 -c US -p https'
     alias umirrors='mirrors | sudo tee /etc/pacman.d/mirrorlist'
-    alias up='yay -Syyu --noconfirm --nodiffmenu --noeditmenu && yay -Sc --noconfirm && yay -Ps'
-    alias pkgs='yay -Qett'
-    alias ipkg='yay -Slq | fzf -m --preview '\''cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")'\'' | xargs -ro yay -S'
-    alias upkg='yay -Qett | fzf -m --preview '\''cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")'\'' | xargs -ro yay -Rc' 
-    alias clean-pkgs='yay -Yc && yay -Sc --noconfirm'
+    alias up='paru -Syyu --noconfirm && paru -Sc --noconfirm && paru -Ps'
+    alias pkgs='paru -Qett'
+    alias ipkg='paru -Slq | fzf -m --preview '\''cat <(paru -Si {1}) <(paru -Fl {1} | awk "{print \$2}")'\'' | xargs -ro paru -S'
+    alias upkg='paru -Qett | fzf -m --preview '\''cat <(paru -Si {1}) <(paru -Fl {1} | awk "{print \$2}")'\'' | xargs -ro paru -Rc' 
+    alias clean-pkgs='paru -c'
     ;;
 
 # TODO: add aliases specific to other distributions I use such as Ubuntu
