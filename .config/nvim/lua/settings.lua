@@ -14,9 +14,12 @@ vim.o.splitbelow = true         -- horizontal splits will be below
 
 vim.bo.expandtab = true         -- convert tabs to spaces
 vim.bo.smartindent = true
+vim.bo.tabstop = 4
+vim.bo.softtabstop = 4
+vim.bo.shiftwidth = 4
 
-vim.cmd('set ts=2')
-vim.cmd('set sw=2')
+--vim.cmd('set ts=4')
+--vim.cmd('set sw=4')
 vim.cmd('set iskeyword+=-')     -- treat dash separated words as a word text object
 
 vim.wo.number = true

@@ -14,38 +14,52 @@ vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
 
 -- Configure plugins
 return require('packer').startup(function()
-  -- Packer can manage itself as an optional plugin
-  use {'wbthomason/packer.nvim', opt = true}
+    -- Packer can manage itself as an optional plugin
+    use {'wbthomason/packer.nvim', opt = true}
 
-  -- Color themes
-  use 'tjdevries/colorbuddy.vim'
-  use 'Th3Whit3Wolf/onebuddy'
+    -- Color themes
+    use 'tjdevries/colorbuddy.vim'
+    use 'Th3Whit3Wolf/onebuddy'
 
-  -- Explorer
-  use 'kyazdani42/nvim-tree.lua'
+    -- Icons
+    use 'kyazdani42/nvim-web-devicons'
+    use 'ryanoasis/vim-devicons'
 
-  -- Telescope
-  use 'nvim-lua/popup.nvim'
-  use 'nvim-lua/plenary.nvim'
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-media-files.nvim'
+    -- Explorer
+    use 'kyazdani42/nvim-tree.lua'
 
-  -- LSP
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
-  use 'scalameta/nvim-metals'
+    -- Telescope
+    use 'nvim-lua/popup.nvim'
+    use 'nvim-lua/plenary.nvim'
+    use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope-media-files.nvim'
 
-  -- Treesitter
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    -- LSP
+    use 'neovim/nvim-lspconfig'
+    use 'hrsh7th/nvim-compe'
+    use 'hrsh7th/vim-vsnip'
+    use 'scalameta/nvim-metals'
 
-  -- Debugging
-  use 'mfussenegger/nvim-dap'
-  use {
-    'nvim-telescope/telescope-dap.nvim',
-    after = {'telescope.nvim', 'nvim-dap'},
-    config = function() require'telescope'.load_extension('dap') end
-  }
+    -- Treesitter
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
-  use 'glepnir/galaxyline.nvim'
+    -- Debugging
+    use 'mfussenegger/nvim-dap'
+    use {
+        'nvim-telescope/telescope-dap.nvim',
+        after = {'telescope.nvim', 'nvim-dap'},
+        config = function() require'telescope'.load_extension('dap') end
+    }
+
+    -- Status line and buffer line
+    use 'glepnir/galaxyline.nvim'
+    use 'romgrk/barbar.nvim'
+
+    -- Git
+    use 'TimUntersberger/neogit'
+    use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+    use 'f-person/git-blame.nvim'
+    use 'tpope/vim-fugitive'
+    use 'tpope/vim-rhubarb'
 end)
 
