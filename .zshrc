@@ -63,6 +63,9 @@ alias clean-logs='sudo journalctl --vacuum-time=5d'
 alias path="tr ':' '\n' <<< \$PATH" # list path elements vertiacally for easier reading
 alias qr='qrencode -t ANSI -s 1 -m 1'
 alias wttr='curl wttr.in'
+alias fkeys='echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode >/dev/null'
+alias lastmod="find . -type f -exec stat --format '%Y :%y %n' \"{}\" \; | sort -nr | cut -d: -f2-"
+alias gwp="gradle properties | grep plugins: | sed 's/^.*\[\(.*\)\]$/\1/' | tr \",\" \"\n\" | xargs -n 1 | sort"
 
 # Common command replacements
 # EXA is a better ls written in rust: https://the.exa.website/
@@ -117,3 +120,6 @@ case $(lsb_release -a | egrep 'Distributor ID:' | cut -f2) in
 
 # TODO: add aliases specific to other distributions I use such as Ubuntu
 esac
+
+# Helpful functions
+function psgrep() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
